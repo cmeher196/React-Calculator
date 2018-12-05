@@ -38,7 +38,7 @@ inputDigit(digit)
 	}else
 		{
 		this.setState({
-			displayValue : displayValue == '0' ? String(digit) : displayValue+digit
+			displayValue : displayValue === '0' ? String(digit) : displayValue+digit
 		})
 	}
 }
@@ -53,7 +53,7 @@ inputDot(){
 		})
 	}
 
-	else if (displayValue.indexOf('.')== -1)
+	else if (displayValue.indexOf('.')=== -1)
 	{
 		this.setState({
 			displayValue : displayValue + '.'
@@ -64,7 +64,7 @@ inputDot(){
 changeSign(){
 	const {displayValue}=this.state
 	this.setState({
-		displayValue : displayValue.charAt(0)== '-' ? displayValue.substr(1) : '-'+displayValue
+		displayValue : displayValue.charAt(0)=== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
 }
 showPercent()
@@ -116,7 +116,7 @@ performOperation(nextoperator)
     
   render() {
       
-      const{displayValue}=this.state
+      const{displayValue}=this.state // never used just assigned 
       
       var butn={
         backgroundColor:"#707070",
@@ -126,7 +126,7 @@ performOperation(nextoperator)
         backgroundColor:"#707070",
     };
     var butn2 = {
-        backgroundColor : "#FFA500"
+        backgroundColor : "#FFA500" // never used
     };
     return (
       <div className="App">
