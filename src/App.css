@@ -82,3 +82,10 @@ button{
     background-color:#FF6600;
     font-style: bold;
 }
+button:hover {background-color: #ff751a}
+
+button:active {
+  background-color: #ff751a;
+  box-shadow: 0 2px #666;
+  transform: translateY(1px);
+}
