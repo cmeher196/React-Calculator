@@ -122,16 +122,20 @@ performOperation(nextoperator)
         backgroundColor:"#ffdb4d",
         color : "#000"
     };
+
     var butn1 = {//numbers
         backgroundColor:"#3D72A4"
 
-          };
-    var butn2 = {
+      };
+
+      var butn2 = {
         backgroundColor : "#FFA500"
     };
     var butn3={//button AC
       backgroundColor:"#CC0000"
     };
+    
+
     return (
       <div className="App">
         <header className="App-header">
