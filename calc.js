@@ -49,9 +49,9 @@ inputDot(){
 	{
 		this.setState({
 			displayValue = displayValue + '.'
-		})	
+		})
 	}
-	
+
 }
 changeSign(){
 	const {displayValue}=this.state
@@ -79,7 +79,7 @@ performOperation(nextoperator)
 		'=':(prevValue,nextValue) ==> nextValue,
 
 	}
-	
+
 	//const operatedValue = operations[operator](prevValue,nextValue)
 	if(value=null)
 	{
@@ -131,10 +131,10 @@ return(
 	 	<button className="Calculator-key key-9" onClick={() this.inputDigit(9)}>9</button>
 	 </div>
 	 <div className="functionKeys">
-	 	<button className="Calculator-key key-add" onClick={()this.performOperation('+')}>+</button>	
-	 	<button className="Calculator-key key-sub" onClick={()this.performOperation('-')}>-</button>	
-		<button className="Calculator-key key-mul" onClick={()this.performOperation('*')}>*</button>	
+	 	<button className="Calculator-key key-add" onClick={()this.performOperation('+')}>+</button>
+	 	<button className="Calculator-key key-sub" onClick={()this.performOperation('-')}>-</button>
+		<button className="Calculator-key key-mul" onClick={()this.performOperation('*')}>*</button>
 		<button className="Calculator-key key-div" onClick={()this.performOperation('/')}>/</button>
-		<button className="Calculator-key key-equal" onClick={()this.performOperation('=')}>=</button>	
+		<button  className="Calculator-key key-equal" onClick={()this.performOperation('=')}>=</button>
 	</div>
-	 )
+		 )
