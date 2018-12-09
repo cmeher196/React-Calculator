@@ -38,7 +38,7 @@ inputDigit(digit)
 	}else
 		{
 		this.setState({
-			displayValue : displayValue == '0' ? String(digit) : displayValue+digit
+			displayValue : displayValue === '0' ? String(digit) : displayValue+digit
 		})
 	}
 }
@@ -53,7 +53,7 @@ inputDot(){
 		})
 	}
 
-	else if (displayValue.indexOf('.')== -1)
+	else if (displayValue.indexOf('.')=== -1)
 	{
 		this.setState({
 			displayValue : displayValue + '.'
@@ -64,7 +64,7 @@ inputDot(){
 changeSign(){
 	const {displayValue}=this.state
 	this.setState({
-		displayValue : displayValue.charAt(0)== '-' ? displayValue.substr(1) : '-'+displayValue
+		displayValue : displayValue.charAt(0)=== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
 }
 showPercent()
@@ -115,6 +115,7 @@ performOperation(nextoperator)
 
 
   render() {
+ master
 
       const{displayValue}=this.state
 
@@ -130,6 +131,8 @@ performOperation(nextoperator)
 
       var butn2 = {
         backgroundColor : "#FFA500"
+  
+     
     };
     var butn3={//button AC
       backgroundColor:"#CC0000"
