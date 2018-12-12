@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-    
+
     constructor(props){
         super(props);
         this.inputDot=this.inputDot.bind(this);
@@ -57,9 +57,9 @@ inputDot(){
 	{
 		this.setState({
 			displayValue : displayValue + '.'
-		})	
+		})
 	}
-	
+
 }
 changeSign(){
 	const {displayValue}=this.state
@@ -87,7 +87,7 @@ performOperation(nextoperator)
 		'=':(prevValue,nextValue) => nextValue,
 
 	}
-	
+
 	//const operatedValue = operations[operator](prevValue,nextValue)
 	if(value==null)
 	{
@@ -97,7 +97,7 @@ performOperation(nextoperator)
 	}
     else if(operator)
 	{
-        
+
 		const currentValue = value || 0
 		const newValue = operations[operator](currentValue,nextValue)
 
@@ -113,21 +113,32 @@ performOperation(nextoperator)
 	})
 }
 
-    
+
   render() {
-      
-      const{displayValue}=this.state // never used just assigned 
-      
-      var butn={
-        backgroundColor:"#707070",
+ master
+
+      const{displayValue}=this.state
+
+      var butn={//arithmetic signs
+        backgroundColor:"#ffdb4d",
         color : "#000"
     };
-    var butn1 = {
-        backgroundColor:"#707070",
+
+    var butn1 = {//numbers
+        backgroundColor:"#3D72A4"
+
+      };
+
+      var butn2 = {
+        backgroundColor : "#FFA500"
+  
+     
     };
-    var butn2 = {
-        backgroundColor : "#FFA500" // never used
+    var butn3={//button AC
+      backgroundColor:"#CC0000"
     };
+    
+
     return (
       <div className="App">
         <header className="App-header">
@@ -142,7 +153,7 @@ performOperation(nextoperator)
 			<div className="numpad">
 				<table cellspacing="10" cellpadding="5">
 				<tr>
-					<td><button style={butn} onClick ={this.clearDisplay}>AC</button></td>
+					<td><button style={butn3} onClick ={this.clearDisplay}>AC</button></td>
 					<td><button style={butn} onClick = {this.showPercent}>%</button></td>
 					<td><button style={butn} onClick={this.changeSign}>+/-</button></td>
 					<td><button style= {butn} onClick={()=>this.performOperation('/')}>/</button></td>
@@ -151,22 +162,22 @@ performOperation(nextoperator)
 					<td><button style={butn1} onClick={()=>this.inputDigit(7)}>7</button></td>
 					<td><button style={butn1} onClick={()=>this.inputDigit(8)}>8</button></td>
 					<td><button style={butn1} onClick={()=>this.inputDigit(9)}>9</button></td>
-					<td><button style={{backgroundColor : "#FFA500"}} onClick={()=>this.performOperation('*')}>x</button></td>
+					<td><button style={butn} onClick={()=>this.performOperation('*')}>x</button></td>
 				</tr>
 				<tr>
 					<td><button style={butn1} onClick={()=> this.inputDigit(4)}>4</button></td>
 					<td><button style={butn1} onClick={() => this.inputDigit(5)}>5</button></td>
 					<td><button style={butn1} onClick={()=> this.inputDigit(6)}>6</button></td>
-					<td><button style={{backgroundColor : "#FFA500"}} onClick={() => this.performOperation('-')}>-</button></td>
+					<td><button style={butn} onClick={() => this.performOperation('-')}>-</button></td>
 				</tr>
 				<tr>
 					<td><button style={butn1} onClick={()=> this.inputDigit(3)}>3</button></td>
 					<td><button style={butn1} onClick={()=> this.inputDigit(2)}>2</button></td>
 					<td><button style={butn1} onClick={()=> this.inputDigit(1)}>1</button></td>
-					<td><button style={{backgroundColor : "#FFA500"}} onClick={() =>this.performOperation('+')}>+</button></td>
+					<td><button style={butn} onClick={() =>this.performOperation('+')}>+</button></td>
 				</tr>
 				<tr>
-					<td><button style={{backgroundColor: "grey" ,width : "50"}} onClick={() => this.inputDigit(0)}>0</button></td>
+					<td><button style={butn1} onClick={() => this.inputDigit(0)}>0</button></td>
 					<td><button style={butn1} onClick={this.inputDot}>.</button></td>
 					<td><button onClick={() =>this.performOperation('=')}>=</button></td>
 				</tr>
