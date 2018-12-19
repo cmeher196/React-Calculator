@@ -115,7 +115,6 @@ performOperation(nextoperator)
 
 
   render() {
- master
 
       const{displayValue}=this.state
 
