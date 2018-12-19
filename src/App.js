@@ -115,7 +115,6 @@ performOperation(nextoperator)
 
 
   render() {
- master
 
       const{displayValue}=this.state
 
@@ -131,13 +130,13 @@ performOperation(nextoperator)
 
       var butn2 = {
         backgroundColor : "#FFA500"
-  
-     
+
+
     };
     var butn3={//button AC
       backgroundColor:"#CC0000"
     };
-    
+
 
     return (
       <div className="App">
