@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-    
+
     constructor(props){
         super(props);
         this.inputDot=this.inputDot.bind(this);
@@ -28,13 +27,13 @@ class App extends Component {
 	}
 
 
-clearDisplay(){
+    clearDisplay(){
 	this.setState({
 		displayValue:'0'
 	})
-}
-inputDigit(digit)
-{
+    }
+    inputDigit(digit)
+    {
 	const { displayValue ,waitingForOperator}=this.state
 
 	if(waitingForOperator)
@@ -48,10 +47,10 @@ inputDigit(digit)
 		this.setState({
 			displayValue : displayValue == '0' ? String(digit) : displayValue+digit
 		})
-	}
-}
+	        }
+     }
 
-inputDot(){
+     inputDot(){
 	const { displayValue , waitingForOperator}=this.state
 	if(waitingForOperator)
 	{
@@ -65,18 +64,18 @@ inputDot(){
 	{
 		this.setState({
 			displayValue : displayValue + '.'
-		})	
-	}
-	
+		})
+  }
+
 }
 changeSign(){
 	const {displayValue}=this.state
 	this.setState({
 		displayValue : displayValue.charAt(0)== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
-}
-showPercent()
-{
+      }
+      showPercent()
+      { 
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
 	this.setState({
@@ -127,6 +126,9 @@ performOperation(nextoperator)
 	const { displayValue ,operator,value}= this.state
 	const nextValue = parseFloat(displayValue)
 	const operations = {
+
+       }
+    
 		'+':(prevValue,nextValue) => prevValue+nextValue,
 		'-':(prevValue,nextValue) => prevValue-nextValue,
 		'*':(prevValue,nextValue) => prevValue*nextValue,
@@ -134,7 +136,7 @@ performOperation(nextoperator)
 		'=':(prevValue,nextValue) => nextValue,
     
 	}
-	
+
 	//const operatedValue = operations[operator](prevValue,nextValue)
 	if(value==null)
 	{
@@ -144,7 +146,7 @@ performOperation(nextoperator)
 	}
     else if(operator)
 	{
-        
+
 		const currentValue = value || 0
 		const newValue = operations[operator](currentValue,nextValue)
 
@@ -152,14 +154,14 @@ performOperation(nextoperator)
 			value:newValue,
 			displayValue:String(newValue)
 		})
-	}
-	this.setState({
+	 }
+	 this.setState({
 		waitingForOperator : true,
 		operator:nextoperator,
 
 	})
-}
 
+       }
     
   render() {
       
@@ -238,6 +240,7 @@ performOperation(nextoperator)
       </div>
     );
   }
+
 }
 
 export default App;
