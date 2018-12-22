@@ -28,9 +28,10 @@
 }
 
 .layout{
-	background-color: #262626;
-	height: 490px;
-	width: 300px;
+	background-color: black;
+	height: 680px;
+	width: 340px;
+
 	color: white;
 	max-width: 100%;
 	max-height: 100%;
@@ -82,6 +83,7 @@ button{
     background-color:#FF6600;
     font-style: bold;
 }
+
 button:hover {background-color: #ff751a}
 
 button:active {
@@ -89,3 +91,4 @@ button:active {
   box-shadow: 0 2px #666;
   transform: translateY(1px);
 }
+
