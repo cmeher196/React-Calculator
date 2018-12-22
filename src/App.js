@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import './logo';
 import './App.css';
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
         this.showLog = this.showLog.bind(this);*/
         this.eValue = this.eValue.bind(this);
         this.piValue = this.piValue.bind(this);
-        
+
     }
 
     state = {
@@ -37,7 +38,7 @@ class App extends Component {
 	const { displayValue ,waitingForOperator}=this.state
 
 	if(waitingForOperator)
-	{   
+	{
 		this.setState({
 			displayValue : String(digit),
 			waitingForOperator: false
@@ -75,7 +76,7 @@ changeSign(){
 	})
       }
       showPercent()
-      { 
+      {
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
 	this.setState({
@@ -100,9 +101,9 @@ showSin()
 {
 	const{displayValue}= this.state
 	const value = parseFloat(displayValue)
-	 var n = (value/180)*3.1459 ; 
+	 var n = (value/180)*3.1459 ;
 	this.setState({
-		displayValue : n  - (n*n*n)/6 + (n*n*n*n*n)/120 , 
+		displayValue : n  - (n*n*n)/6 + (n*n*n*n*n)/120 ,
 	})
 }*/
 
@@ -127,14 +128,14 @@ performOperation(nextoperator)
 	const nextValue = parseFloat(displayValue)
 	const operations = {
 
-       }
-    
+
+
 		'+':(prevValue,nextValue) => prevValue+nextValue,
 		'-':(prevValue,nextValue) => prevValue-nextValue,
 		'*':(prevValue,nextValue) => prevValue*nextValue,
 		'/':(prevValue,nextValue) => prevValue/nextValue,
 		'=':(prevValue,nextValue) => nextValue,
-    
+
 	}
 
 	//const operatedValue = operations[operator](prevValue,nextValue)
@@ -162,11 +163,11 @@ performOperation(nextoperator)
 	})
 
        }
-    
+
   render() {
-      
+
       const{displayValue}=this.state
-      
+
       var butn={
         backgroundColor:"#707070",
         color : "#000"
@@ -180,7 +181,7 @@ performOperation(nextoperator)
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+
           <h1 className="App-title">Welcome to My Calculator</h1>
         </header>
         <center>
@@ -191,7 +192,7 @@ performOperation(nextoperator)
 			<div className="numpad">
 				<table cellspacing="10" cellpadding="5">
 				<tr>
-					
+
 					<td><button style={butn} onClick = {this.showPercent}>%</button></td>
 					<td><button style={butn} onClick={this.changeSign}>+/-</button></td>
 					<td><button style= {butn} onClick={()=>this.performOperation('/')}>/</button></td>
