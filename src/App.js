@@ -20,13 +20,13 @@ class App extends Component {
 	}
 
 
-clearDisplay(){
+    clearDisplay(){
 	this.setState({
 		displayValue:'0'
 	})
-}
-inputDigit(digit)
-{
+    }
+    inputDigit(digit)
+    {
 	const { displayValue ,waitingForOperator}=this.state
 
 	if(waitingForOperator)
@@ -40,10 +40,10 @@ inputDigit(digit)
 		this.setState({
 			displayValue : displayValue === '0' ? String(digit) : displayValue+digit
 		})
-	}
-}
+	        }
+     }
 
-inputDot(){
+     inputDot(){
 	const { displayValue , waitingForOperator}=this.state
 	if(waitingForOperator)
 	{
@@ -58,7 +58,7 @@ inputDot(){
 		this.setState({
 			displayValue : displayValue + '.'
 		})
-	}
+  }
 
 }
 changeSign(){
@@ -66,20 +66,20 @@ changeSign(){
 	this.setState({
 		displayValue : displayValue.charAt(0)=== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
-}
-showPercent()
-{
+      }
+      showPercent()
+      { 
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
 	this.setState({
 		displayValue : value/100
 	})
-}
-performOperation(nextoperator)
-{
-	const { displayValue ,operator,value}= this.state
-	const nextValue = parseFloat(displayValue)
-	const operations = {
+       }
+       performOperation(nextoperator)
+       {
+	 const { displayValue ,operator,value}= this.state
+	 const nextValue = parseFloat(displayValue)
+	 const operations = {
 		'+':(prevValue,nextValue) => prevValue+nextValue,
 		'-':(prevValue,nextValue) => prevValue-nextValue,
 		'*':(prevValue,nextValue) => prevValue*nextValue,
@@ -105,89 +105,78 @@ performOperation(nextoperator)
 			value:newValue,
 			displayValue:String(newValue)
 		})
-	}
-	this.setState({
+	 }
+	 this.setState({
 		waitingForOperator : true,
 		operator:nextoperator,
 
 	})
-}
-
-
-  render() {
-
-      const{displayValue}=this.state
-
-      var butn={//arithmetic signs
-        backgroundColor:"#ffdb4d",
-        color : "#000"
-    };
-
-    var butn1 = {//numbers
-        backgroundColor:"#3D72A4"
-
-      };
-
-      var butn2 = {
-        backgroundColor : "#FFA500"
-  
-     
-    };
-    var butn3={//button AC
-      backgroundColor:"#CC0000"
-    };
+       }
     
+       render() 
+       {
+                 const{displayValue}=this.state // never used just assigned 
+	         var butn={
+                            backgroundColor:"#707070",
+                            color : "#000"
+                          };
+                 var butn1 = {
+                               backgroundColor:"#707070",
+                              };
+                 var butn2 = {
+                               backgroundColor : "#FFA500" // never used
+                              };
+                 return (
+      			  <div className="App">
+         		    <header className="App-header">
+         		       <img src={logo} className="App-logo" alt="logo" />
+          		           <h1 className="App-title">Welcome to My Calculator</h1>
+       			    </header>
+                          <center>
+		                <div className="layout">
+			            <div className="display">
+                                       <input type="text" id="text" value={this.state.displayValue} />
+			            </div>
+			                <div className="numpad">
+				           <table cellspacing="10" cellpadding="5">
+				             <tr>
+					            <td><button style={butn} onClick ={this.clearDisplay}>AC</button></td>
+					            <td><button style={butn} onClick = {this.showPercent}>%</button></td>
+					            <td><button style={butn} onClick={this.changeSign}>+/-</button></td>
+					            <td><button style= {butn} onClick={()=>this.performOperation('/')}>/</button></td>
+				             </tr>
+				             <tr>
+					             <td><button style={butn1} onClick={()=>this.inputDigit(7)}>7</button></td>
+					             <td><button style={butn1} onClick={()=>this.inputDigit(8)}>8</button></td>
+					             <td><button style={butn1} onClick={()=>this.inputDigit(9)}>9</button></td>
+					             <td><button style={{backgroundColor : "#FFA500"}} onClick={()=>this.performOperation('*')}>x</button></td>
+				             </tr>
+				             <tr>
+				                     <td><button style={butn1} onClick={()=> this.inputDigit(4)}>4</button></td>
+					             <td><button style={butn1} onClick={() => this.inputDigit(5)}>5</button></td>
+					             <td><button style={butn1} onClick={()=> this.inputDigit(6)}>6</button></td>
+					             <td><button style={{backgroundColor : "#FFA500"}} onClick={() => this.performOperation('-')}>-</button></td>
+				            </tr>
+				             <tr>
+					             <td><button style={butn1} onClick={()=> this.inputDigit(3)}>3</button></td>
+					             <td><button style={butn1} onClick={()=> this.inputDigit(2)}>2</button></td>
+					             <td><button style={butn1} onClick={()=> this.inputDigit(1)}>1</button></td>
+					             <td><button style={{backgroundColor : "#FFA500"}} onClick={() =>this.performOperation('+')}>+</button></td>
+				            </tr>
+				            <tr>
+					             <td><button style={{backgroundColor: "grey" ,width : "50"}} onClick={() => this.inputDigit(0)}>0</button></td>
+					             <td><button style={butn1} onClick={this.inputDot}>.</button></td>
+					             <td><button onClick={() =>this.performOperation('=')}>=</button></td>
+				            </tr>
+				         </table>
+	       		              </div>
+		                 </div>
+	                  </center>
+ 
+                     </div>
+                    );
+           }
 
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to My Calculator</h1>
-        </header>
-        <center>
-		<div className="layout">
-			<div className="display">
-                <input type="text" id="text" value={this.state.displayValue} />
-			</div>
-			<div className="numpad">
-				<table cellspacing="10" cellpadding="5">
-				<tr>
-					<td><button style={butn3} onClick ={this.clearDisplay}>AC</button></td>
-					<td><button style={butn} onClick = {this.showPercent}>%</button></td>
-					<td><button style={butn} onClick={this.changeSign}>+/-</button></td>
-					<td><button style= {butn} onClick={()=>this.performOperation('/')}>/</button></td>
-				</tr>
-				<tr>
-					<td><button style={butn1} onClick={()=>this.inputDigit(7)}>7</button></td>
-					<td><button style={butn1} onClick={()=>this.inputDigit(8)}>8</button></td>
-					<td><button style={butn1} onClick={()=>this.inputDigit(9)}>9</button></td>
-					<td><button style={butn} onClick={()=>this.performOperation('*')}>x</button></td>
-				</tr>
-				<tr>
-					<td><button style={butn1} onClick={()=> this.inputDigit(4)}>4</button></td>
-					<td><button style={butn1} onClick={() => this.inputDigit(5)}>5</button></td>
-					<td><button style={butn1} onClick={()=> this.inputDigit(6)}>6</button></td>
-					<td><button style={butn} onClick={() => this.performOperation('-')}>-</button></td>
-				</tr>
-				<tr>
-					<td><button style={butn1} onClick={()=> this.inputDigit(3)}>3</button></td>
-					<td><button style={butn1} onClick={()=> this.inputDigit(2)}>2</button></td>
-					<td><button style={butn1} onClick={()=> this.inputDigit(1)}>1</button></td>
-					<td><button style={butn} onClick={() =>this.performOperation('+')}>+</button></td>
-				</tr>
-				<tr>
-					<td><button style={butn1} onClick={() => this.inputDigit(0)}>0</button></td>
-					<td><button style={butn1} onClick={this.inputDot}>.</button></td>
-					<td><button onClick={() =>this.performOperation('=')}>=</button></td>
-				</tr>
-				</table>
-			</div>
-		</div>
-	</center>
-
-      </div>
-    );
-  }
 }
 
 export default App;
