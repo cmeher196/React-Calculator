@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-    
+
     constructor(props){
         super(props);
         this.inputDot=this.inputDot.bind(this);
@@ -57,12 +57,11 @@ class App extends Component {
 	{
 		this.setState({
 			displayValue : displayValue + '.'
-		})	
-	}
-	
-      }
+		})
+  }
 
-      changeSign(){
+}
+changeSign(){
 	const {displayValue}=this.state
 	this.setState({
 		displayValue : displayValue.charAt(0)=== '-' ? displayValue.substr(1) : '-'+displayValue
@@ -87,17 +86,18 @@ class App extends Component {
 		'/':(prevValue,nextValue) => prevValue/nextValue,
 		'=':(prevValue,nextValue) => nextValue,
 
-	 }
-	
-	 //const operatedValue = operations[operator](prevValue,nextValue)
-	 if(value==null)
-	 {
+	}
+
+	//const operatedValue = operations[operator](prevValue,nextValue)
+	if(value==null)
+	{
 		this.setState({
 			value:nextValue
 		})
-	 }
-         else if(operator)
-	 {
+	}
+    else if(operator)
+	{
+
 		const currentValue = value || 0
 		const newValue = operations[operator](currentValue,nextValue)
 
@@ -112,7 +112,6 @@ class App extends Component {
 
 	})
        }
-
     
        render() 
        {
@@ -177,6 +176,7 @@ class App extends Component {
                      </div>
                     );
            }
+
 }
 
 export default App;
