@@ -56,7 +56,7 @@ inputDot(){
 changeSign(){
 	const {displayValue}=this.state
 	this.setState({
-		displayValue=displayValue.charAt(0)== '-' ? displayValue.substr(1) : '-'+displayValue
+		displayValue=displayValue.substr(0,1)== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
 }
 showPercent()
