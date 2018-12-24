@@ -49,9 +49,9 @@ inputDot(){
 	{
 		this.setState({
 			displayValue = displayValue + '.'
-		})
+		})	
 	}
-
+	
 }
 changeSign(){
 	const {displayValue}=this.state
@@ -67,6 +67,76 @@ showPercent()
 		displayValue=displayValue(value/100)
 	})
 }
+showSin()
+{
+	const{displayValue}= this.state
+	const value = parseFloat(displayValue)
+	 var n = (value/180)*Math.PI ;
+		this.setState({
+		displayValue : (n  - (Math.pow(n,3))/6 + (Math.pow(n,5))/120  - (Math.pow(n,7))/5040).toPrecision(3),
+	})
+}
+showCos()
+ {
+	const{displayValue}= this.state
+	const value = parseFloat(displayValue)
+	 var n = (value/180)*Math.PI;
+	 
+	 this.setState({
+		displayValue : (1 - (Math.pow(n,2)/2) + (Math.pow(n,4)/24) - (Math.pow(n,6)/720 )).toPrecision(3),
+ 	})
+ }
+ showTan()
+ {
+	const{displayValue}= this.state
+	const value = parseFloat(displayValue)
+	 var n = (value/180)*Math.PI;
+	 
+	 this.setState({
+		displayValue : (n + Math.pow(n,3)/3  + (2*Math.pow(n,5))/15 + (17*Math.pow(n,7))/315 ).toPrecision(3),
+	})
+ }
+ 	
+ 
+ showFac(){
+ 	const{displayValue}=this.state
+ 	const value = parseFloat(displayValue)
+ 		function computeFactorialOfN(n) {
+  			var output=1;
+  				for(var i=1; i<=n; i++){
+    				output*=i;
+  				} return output;
+		}
+		this.setState({
+ 		displayValue :computeFactorialOfN(value) ,
+ 	})
+
+ }
+
+showLog(){
+
+	const{displayValue}=this.state
+	const value = parseFloat(displayValue)
+	this.setState({
+		displayValue : (Math.log(value)).toPrecision(3), 
+	})
+}
+ 
+ eValue(){
+	const{displayValue}= this.state
+	this.setState({
+	displayValue : 2.718281,
+    })
+
+ }
+
+ piValue(){
+	const{displayValue}= this.state
+	this.setState({
+	displayValue : Math.PI ,
+ })
+ }
+
 performOperation(nextoperator)
 {
 	const { displayValue ,operator,value}= this.state
@@ -77,9 +147,10 @@ performOperation(nextoperator)
 		'*':(prevValue,nextValue) ==> prevValue*nextValue,
 		'/':(prevValue,nextValue) ==> prevValue/nextValue,
 		'=':(prevValue,nextValue) ==> nextValue,
+		'^' : (prevValue,nextValue) => Math.pow(prevValue,nextValue),
 
 	}
-
+	
 	//const operatedValue = operations[operator](prevValue,nextValue)
 	if(value=null)
 	{
@@ -131,10 +202,12 @@ return(
 	 	<button className="Calculator-key key-9" onClick={() this.inputDigit(9)}>9</button>
 	 </div>
 	 <div className="functionKeys">
-	 	<button className="Calculator-key key-add" onClick={()this.performOperation('+')}>+</button>
-	 	<button className="Calculator-key key-sub" onClick={()this.performOperation('-')}>-</button>
-		<button className="Calculator-key key-mul" onClick={()this.performOperation('*')}>*</button>
+	 	<button className="Calculator-key key-add" onClick={()this.performOperation('+')}>+</button>	
+	 	<button className="Calculator-key key-sub" onClick={()this.performOperation('-')}>-</button>	
+		<button className="Calculator-key key-mul" onClick={()this.performOperation('*')}>*</button>	
 		<button className="Calculator-key key-div" onClick={()this.performOperation('/')}>/</button>
-		<button  className="Calculator-key key-equal" onClick={()this.performOperation('=')}>=</button>
+		<button className="Calculator-key key-equal" onClick={()this.performOperation('=')}>=</button>	
+		button className="Calculator-key key-pow" onClick={()this.performOperation('^')}>/</button>
+		
 	</div>
-		 )
+	 )
