@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-// import './logo';
+import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-
+    
     constructor(props){
         super(props);
         this.inputDot=this.inputDot.bind(this);
         this.clearDisplay=this.clearDisplay.bind(this);
         this.showPercent=this.showPercent.bind(this);
         this.changeSign=this.changeSign.bind(this);
-        /*this.showSin = this.showSin.bind(this);
+        this.showSin = this.showSin.bind(this);
         this.showCos = this.showCos.bind(this);
-        this.showPow = this.showPow.bind(this);
         this.showTan = this .showTan.bind(this);
-        this.showLog = this.showLog.bind(this);*/
+        this.showLog = this.showLog.bind(this);
+        this.showFac = this.showFac.bind(this);
         this.eValue = this.eValue.bind(this);
         this.piValue = this.piValue.bind(this);
-
+        
     }
 
     state = {
@@ -28,17 +28,18 @@ class App extends Component {
 	}
 
 
-    clearDisplay(){
+
+ clearDisplay(){
 	this.setState({
 		displayValue:'0'
 	})
-    }
-    inputDigit(digit)
-    {
+ }
+ inputDigit(digit)
+ {
 	const { displayValue ,waitingForOperator}=this.state
 
 	if(waitingForOperator)
-	{
+	{   
 		this.setState({
 			displayValue : String(digit),
 			waitingForOperator: false
@@ -48,10 +49,10 @@ class App extends Component {
 		this.setState({
 			displayValue : displayValue == '0' ? String(digit) : displayValue+digit
 		})
-	        }
-     }
+	}
+ }
 
-     inputDot(){
+ inputDot(){
 	const { displayValue , waitingForOperator}=this.state
 	if(waitingForOperator)
 	{
@@ -65,79 +66,110 @@ class App extends Component {
 	{
 		this.setState({
 			displayValue : displayValue + '.'
-		})
-  }
-
-}
-changeSign(){
+		})	
+	}
+  	
+ }
+ changeSign(){
 	const {displayValue}=this.state
 	this.setState({
-		displayValue : displayValue.charAt(0)== '-' ? displayValue.substr(1) : '-'+displayValue
+		displayValue : displayValue.substr(0,1)== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
-      }
-      showPercent()
-      {
+ }
+ showPercent()
+ {
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
 	this.setState({
 		displayValue : value/100
 	})
-}
-/*showPow()
-{	const{displayValue}= this.state
-	const value = parseFloat(displayValue)
-	this.setState({
-		let m = prevValue,
-		let n = nextValue,
-		for(var i = 0 ;i < n ; i++){
-			prevValue = prevValue *  m ,
-		}
-
-		displayValue : prevValue ,
-	})
-
-}
-showSin()
+ }
+ 
+ 
+ showSin()
 {
 	const{displayValue}= this.state
 	const value = parseFloat(displayValue)
-	 var n = (value/180)*3.1459 ;
-	this.setState({
-		displayValue : n  - (n*n*n)/6 + (n*n*n*n*n)/120 ,
+	 var n = (value/180)*Math.PI ;
+		this.setState({
+		displayValue : (n  - (Math.pow(n,3))/6 + (Math.pow(n,5))/120  - (Math.pow(n,7))/5040).toPrecision(3),
 	})
-}*/
+}
+ showCos()
+ {
+	const{displayValue}= this.state
+	const value = parseFloat(displayValue)
+	 var n = (value/180)*Math.PI;
+	 
+	 this.setState({
+		displayValue : (1 - (Math.pow(n,2)/2) + (Math.pow(n,4)/24) - (Math.pow(n,6)/720 )).toPrecision(3),
+ 	})
+ }
+ showTan()
+ {
+	const{displayValue}= this.state
+	const value = parseFloat(displayValue)
+	 var n = (value/180)*Math.PI;
+	 
+	 this.setState({
+		displayValue : (n + Math.pow(n,3)/3  + (2*Math.pow(n,5))/15 + (17*Math.pow(n,7))/315 ).toPrecision(3),
+	})
+ }
 
-eValue(){
+	
+ 
+ showFac(){
+ 	const{displayValue}=this.state
+ 	const value = parseFloat(displayValue)
+ 		function computeFactorialOfN(n) {
+  			var output=1;
+  				for(var i=1; i<=n; i++){
+    				output*=i;
+  				} return output;
+		}
+		this.setState({
+ 		displayValue :computeFactorialOfN(value) ,
+ 	})
+
+ }
+
+showLog(){
+
+	const{displayValue}=this.state
+	const value = parseFloat(displayValue)
+	this.setState({
+		displayValue : (Math.log(value)).toPrecision(3), 
+	})
+}
+ 
+ eValue(){
 	const{displayValue}= this.state
 	this.setState({
 	displayValue : 2.718281,
     })
 
-}
+ }
 
-piValue(){
+ piValue(){
 	const{displayValue}= this.state
 	this.setState({
-	displayValue : 3.14159,
+	displayValue : Math.PI ,
  })
-}
+ }
 
-performOperation(nextoperator)
-{
+ performOperation(nextoperator)
+ {
 	const { displayValue ,operator,value}= this.state
 	const nextValue = parseFloat(displayValue)
 	const operations = {
-
-
-
 		'+':(prevValue,nextValue) => prevValue+nextValue,
 		'-':(prevValue,nextValue) => prevValue-nextValue,
 		'*':(prevValue,nextValue) => prevValue*nextValue,
 		'/':(prevValue,nextValue) => prevValue/nextValue,
 		'=':(prevValue,nextValue) => nextValue,
-
+    	'^' : (prevValue,nextValue) => Math.pow(prevValue,nextValue),
 	}
-
+	
 	//const operatedValue = operations[operator](prevValue,nextValue)
 	if(value==null)
 	{
@@ -147,7 +179,7 @@ performOperation(nextoperator)
 	}
     else if(operator)
 	{
-
+        
 		const currentValue = value || 0
 		const newValue = operations[operator](currentValue,nextValue)
 
@@ -155,33 +187,33 @@ performOperation(nextoperator)
 			value:newValue,
 			displayValue:String(newValue)
 		})
-	 }
-	 this.setState({
+	}
+	this.setState({
 		waitingForOperator : true,
 		operator:nextoperator,
 
 	})
+ }
 
-       }
-
+    
   render() {
-
+      
       const{displayValue}=this.state
-
+      
       var butn={
         backgroundColor:"#707070",
         color : "#000"
-    };
-    var butn1 = {
+     };
+     var butn1 = {
         backgroundColor:"#707070",
-    };
-    var butn2 = {
-        backgroundColor : "#FFA500"
-    };
-    return (
+     };
+     var butn2 = {
+         backgroundColor : "#FFA500"
+     };
+     return (
       <div className="App">
         <header className="App-header">
-
+          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to My Calculator</h1>
         </header>
         <center>
@@ -192,7 +224,7 @@ performOperation(nextoperator)
 			<div className="numpad">
 				<table cellspacing="10" cellpadding="5">
 				<tr>
-
+					
 					<td><button style={butn} onClick = {this.showPercent}>%</button></td>
 					<td><button style={butn} onClick={this.changeSign}>+/-</button></td>
 					<td><button style= {butn} onClick={()=>this.performOperation('/')}>/</button></td>
@@ -202,13 +234,13 @@ performOperation(nextoperator)
 				    <td><button style={butn} onClick = {this.showSin}>sin</button></td>
 				    <td><button style={butn} onClick = {this.showCos}>cos</button></td>
 				    <td><button style={butn} onClick = {this.showTan}>tan</button></td>
-				    <td><button style={butn} onClick = {this.showLog}>log</button></td>
+				    <td><button style={butn} onClick = {this.showLog}>ln</button></td>
 				</tr>
 				<tr>
 				    <td><button style={butn} onClick = {this.eValue }>e</button></td>
 				    <td><button style={butn} onClick = {this.piValue}>pi</button></td>
-				    <td><button style={butn} onClick = {this.showFact}>!</button></td>
-				    <td><button style={butn} onClick = {this.showSin}>^</button></td>
+				    <td><button style={butn} onClick = {this.showFac}>!</button></td>
+				    <td><button style={butn} onClick = {() =>this.performOperation('^')}>^</button></td>
 				</tr>
 				<tr>
 					<td><button style={butn1} onClick={()=>this.inputDigit(7)}>7</button></td>
@@ -236,12 +268,16 @@ performOperation(nextoperator)
 				</table>
 			</div>
 		</div>
-	</center>
+	 </center>
 
       </div>
-    );
-  }
-
+     );
+    }
 }
 
 export default App;
+
+		
+
+
+
