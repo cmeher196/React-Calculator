@@ -11,7 +11,43 @@ class Calculator extends React.Component{
 		value: null
 	}
 }
+showLast(digit)
+ {
+	const { displayValue ,waitingForOperator}=this.state
+         var previous ;
+         if(waitingForOperator)
+	{   
+		this.setState({
+			previous : displayValue ,
+			waitingForOperator: false
+		})
+	}else
+		{
+		this.setState({
+			previous : displayValue ,
+			
+		})
+	}
+   this.setState({
+   	  displayValue : previous ,
+   	})
+		
+ }
 
+ showAbs(){
+ 	const {displayValue}=this.state
+ 	this.setState({
+		displayValue : displayValue.substr(0,1)== '-' ? displayValue.substr(1) : displayValue
+	})
+
+ }
+showSqa(){
+ 	const {displayValue}=this.state
+ 	this.setState({
+		displayValue : displayValue * displayValue
+	})
+
+ }
 clearDisplay(){
 	this.setState({
 		displayValue='0'
@@ -112,14 +148,21 @@ showCos()
  	})
 
  }
-
-showLog(){
+showLn(){
 
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
 	this.setState({
 		displayValue : (Math.log(value)).toPrecision(3), 
 	})
+}
+showLog(){
+	const{displayValue} = this.state
+	const value = parseFloat(displayValue)
+	this.setState({
+		displayValue : (Math.log(value)/Math.log(10)).toPrecision(3), 
+	})
+
 }
  
  eValue(){
@@ -187,6 +230,20 @@ return(
 	 			<button className="Calculator-key clear-key" onClick={()==> this.clearDisplay}>AC</button>
 	 			<button className="Calculator-key sign-key" onClick={()==> this.changeSign>+/-</button>
 	 			<button className="Calculator-key percent-key" onClick={()==> this.showPercent>%</button>
+	 		    <button className="Calculator-key abs" onClick = {()==> this.showAbs > |x| </button>
+	 		    <button className="Calculator-key sin" onClick = {()==> this.showSin > sin </button>
+	 		    <button className="Calculator-key cos" onClick = {()==> this.showCos > cos </button>
+	 		    <button className="Calculator-key tan" onClick = {()==> this.showTan > tan </button>
+	 		    <button className="Calculator-key log" onClick = {()==> this.showLog > log </button>
+	 		    <button className="Calculator-key ln" onClick = {()==> this.showLn > ln </button>
+	 		    <button className="Calculator-key log" onClick = {()==> this.showLog > log </button>
+	 		    <button className="Calculator-key sq" onClick = {()==> this.showSqa > sq </button>
+	 		    <button className="Calculator-key log" onClick = {()==> this.showLog > log </button>
+	 		    <button className="Calculator-key Cancel" onClick = {()==> this.showLast > C </button>
+	 		    <button className="Calculator-key e" onClick = {()==> this.eValue > e </button>
+	 		    <button className="Calculator-key pi" onClick = {()==> this.piValue > pi </button>
+	 		    <button className="Calculator-key fac" onClick = {()==> this.showFac > ! </button>
+
 	 </div>
 	 <div className="digitKeys">
 	 	<button className="Calculator-key key-0" onClick={() this.inputDigit(0)}>0</button>
@@ -211,3 +268,5 @@ return(
 		
 	</div>
 	 )
+
+	 	
