@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
     
     constructor(props){
         super(props);
@@ -17,6 +18,11 @@ class App extends Component {
         this.showFac = this.showFac.bind(this);
         this.eValue = this.eValue.bind(this);
         this.piValue = this.piValue.bind(this);
+        this.showSqa = this.showSqa.bind(this);
+        this.showAbs = this.showAbs.bind(this);
+        this.showLn = this.showLn.bind(this);
+        this.showLast = this .showLast.bind(this);
+
         
     }
 
@@ -29,15 +35,44 @@ class App extends Component {
 
 
 
+
  clearDisplay(){
 	this.setState({
 		displayValue:'0'
 	})
  }
+
+ showLast(digit)
+ {
+	const { displayValue ,waitingForOperator}=this.state
+         var previous ;
+         if(waitingForOperator)
+	{   
+		this.setState({
+			previous : displayValue ,
+			waitingForOperator: false
+		})
+	}else
+		{
+		this.setState({
+			previous : displayValue ,
+			
+		})
+	}
+   this.setState({
+   	  displayValue : previous ,
+   	})
+		
+ }
+	  
+
+
+ 
+
  inputDigit(digit)
  {
 	const { displayValue ,waitingForOperator}=this.state
-
+    
 	if(waitingForOperator)
 	{   
 		this.setState({
@@ -47,6 +82,7 @@ class App extends Component {
 	}else
 		{
 		this.setState({
+			
 			displayValue : displayValue == '0' ? String(digit) : displayValue+digit
 		})
 	}
@@ -76,6 +112,22 @@ class App extends Component {
 		displayValue : displayValue.substr(0,1)== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
  }
+ showAbs(){
+ 	const {displayValue}=this.state
+ 	this.setState({
+		displayValue : displayValue.substr(0,1)== '-' ? displayValue.substr(1) : displayValue
+	})
+
+ }
+
+ showSqa(){
+ 	const {displayValue}=this.state
+ 	this.setState({
+		displayValue : displayValue * displayValue
+	})
+
+ }
+
  showPercent()
  {
 	const{displayValue}=this.state
@@ -133,13 +185,21 @@ class App extends Component {
 
  }
 
-showLog(){
+showLn(){
 
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
 	this.setState({
 		displayValue : (Math.log(value)).toPrecision(3), 
 	})
+}
+showLog(){
+	const{displayValue} = this.state
+	const value = parseFloat(displayValue)
+	this.setState({
+		displayValue : (Math.log(value)/Math.log(10)).toPrecision(3), 
+	})
+
 }
  
  eValue(){
@@ -168,6 +228,7 @@ showLog(){
 		'/':(prevValue,nextValue) => prevValue/nextValue,
 		'=':(prevValue,nextValue) => nextValue,
     	'^' : (prevValue,nextValue) => Math.pow(prevValue,nextValue),
+    	
 	}
 	
 	//const operatedValue = operations[operator](prevValue,nextValue)
@@ -231,10 +292,16 @@ showLog(){
 					<td><button style={butn2} onClick ={this.clearDisplay}>AC</button></td>
 				</tr>
 				<tr>
+				     <td> <button style = {butn} onClick = {this.showSqa}> sq </button></td>
+				     <td> <button style = {butn} onClick = {this.showAbs}> |x| </button></td>
+				     <td> <button style = {butn} onClick = {this.showLog}> log</button></td>
+				     <td> <button style = {butn} onClick = {this.showLast}>C</button></td>
+				</tr>
+				<tr>
 				    <td><button style={butn} onClick = {this.showSin}>sin</button></td>
 				    <td><button style={butn} onClick = {this.showCos}>cos</button></td>
 				    <td><button style={butn} onClick = {this.showTan}>tan</button></td>
-				    <td><button style={butn} onClick = {this.showLog}>ln</button></td>
+				    <td><button style={butn} onClick = {this.showLn}>ln</button></td>
 				</tr>
 				<tr>
 				    <td><button style={butn} onClick = {this.eValue }>e</button></td>
@@ -264,6 +331,7 @@ showLog(){
 					<td><button style={{backgroundColor: "grey" ,width : "50"}} onClick={() => this.inputDigit(0)}>0</button></td>
 					<td><button style={butn1} onClick={this.inputDot}>.</button></td>
 					<td><button onClick={() =>this.performOperation('=')}>=</button></td>
+					
 				</tr>
 				</table>
 			</div>
@@ -276,6 +344,8 @@ showLog(){
 }
 
 export default App;
+
+ 
 
 		
 
