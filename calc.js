@@ -34,14 +34,14 @@ showLast(digit)
 		
  }
 
- showAbs(){
+ Absolute(){
  	const {displayValue}=this.state
  	this.setState({
 		displayValue : displayValue.substr(0,1)== '-' ? displayValue.substr(1) : displayValue
 	})
 
  }
-showSqa(){
+Square(){
  	const {displayValue}=this.state
  	this.setState({
 		displayValue : displayValue * displayValue
@@ -95,7 +95,7 @@ changeSign(){
 		displayValue=displayValue.substr(0,1)== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
 }
-showPercent()
+Percent()
 {
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
@@ -103,7 +103,7 @@ showPercent()
 		displayValue=displayValue(value/100)
 	})
 }
-showSin()
+Sin()
 {
 	const{displayValue}= this.state
 	const value = parseFloat(displayValue)
@@ -112,7 +112,7 @@ showSin()
 		displayValue : (n  - (Math.pow(n,3))/6 + (Math.pow(n,5))/120  - (Math.pow(n,7))/5040).toPrecision(3),
 	})
 }
-showCos()
+Cos()
  {
 	const{displayValue}= this.state
 	const value = parseFloat(displayValue)
@@ -122,7 +122,7 @@ showCos()
 		displayValue : (1 - (Math.pow(n,2)/2) + (Math.pow(n,4)/24) - (Math.pow(n,6)/720 )).toPrecision(3),
  	})
  }
- showTan()
+Tan()
  {
 	const{displayValue}= this.state
 	const value = parseFloat(displayValue)
@@ -134,7 +134,7 @@ showCos()
  }
  	
  
- showFac(){
+Fac(){
  	const{displayValue}=this.state
  	const value = parseFloat(displayValue)
  		function computeFactorialOfN(n) {
@@ -148,7 +148,7 @@ showCos()
  	})
 
  }
-showLn(){
+Ln(){
 
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
@@ -156,7 +156,7 @@ showLn(){
 		displayValue : (Math.log(value)).toPrecision(3), 
 	})
 }
-showLog(){
+Log(){
 	const{displayValue} = this.state
 	const value = parseFloat(displayValue)
 	this.setState({
@@ -164,8 +164,14 @@ showLog(){
 	})
 
 }
+ squareRoot(){
+	 const {displayValue}=this.state
+	 this.setState({
+		displayValue : Math.Sqrt(displayValue)
+	})
+ }
  
- eValue(){
+ e(){
 	const{displayValue}= this.state
 	this.setState({
 	displayValue : 2.718281,
@@ -173,7 +179,7 @@ showLog(){
 
  }
 
- piValue(){
+ pi(){
 	const{displayValue}= this.state
 	this.setState({
 	displayValue : Math.PI ,
@@ -229,20 +235,20 @@ return(
 	 			<div className="functionKeys">
 	 			<button className="Calculator-key clear-key" onClick={()==> this.clearDisplay}>AC</button>
 	 			<button className="Calculator-key sign-key" onClick={()==> this.changeSign>+/-</button>
-	 			<button className="Calculator-key percent-key" onClick={()==> this.showPercent>%</button>
-	 		    <button className="Calculator-key abs" onClick = {()==> this.showAbs > |x| </button>
-	 		    <button className="Calculator-key sin" onClick = {()==> this.showSin > sin </button>
-	 		    <button className="Calculator-key cos" onClick = {()==> this.showCos > cos </button>
-	 		    <button className="Calculator-key tan" onClick = {()==> this.showTan > tan </button>
-	 		    <button className="Calculator-key log" onClick = {()==> this.showLog > log </button>
-	 		    <button className="Calculator-key ln" onClick = {()==> this.showLn > ln </button>
-	 		    <button className="Calculator-key log" onClick = {()==> this.showLog > log </button>
-	 		    <button className="Calculator-key sq" onClick = {()==> this.showSqa > sq </button>
-	 		    <button className="Calculator-key log" onClick = {()==> this.showLog > log </button>
+	 			<button className="Calculator-key percent-key" onClick={()==> this.Percent>%</button>
+	 		    <button className="Calculator-key abs" onClick = {()==> this.Absolute > |x| </button>
+	 		    <button className="Calculator-key sin" onClick = {()==> this.Sin > sin </button>
+	 		    <button className="Calculator-key cos" onClick = {()==> this.Cos > cos </button>
+	 		    <button className="Calculator-key tan" onClick = {()==> this.Tan > tan </button>
+	 		    <button className="Calculator-key log" onClick = {()==> this.Log > log </button>
+	 		    <button className="Calculator-key ln" onClick = {()==> this.Ln > ln </button>
+	 		    <button className="Calculator-key sq" onClick = {()==> this.Square > sq </button>
+	 		    <button className="Calculator-key log" onClick = {()==> this.Log > log </button>
 	 		    <button className="Calculator-key Cancel" onClick = {()==> this.showLast > C </button>
-	 		    <button className="Calculator-key e" onClick = {()==> this.eValue > e </button>
-	 		    <button className="Calculator-key pi" onClick = {()==> this.piValue > pi </button>
-	 		    <button className="Calculator-key fac" onClick = {()==> this.showFac > ! </button>
+	 		    <button className="Calculator-key e" onClick = {()==> this.e > e </button>
+	 		    <button className="Calculator-key pi" onClick = {()==> this.pi > pi </button>
+	 		    <button className="Calculator-key fac" onClick = {()==> this.Factorial > ! </button>
+			    <button className="Calculator-key sqrt" onClick = {()==> this.squareRoot > ! </button>
 
 	 </div>
 	 <div className="digitKeys">
