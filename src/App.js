@@ -9,18 +9,19 @@ class App extends Component {
         super(props);
         this.inputDot=this.inputDot.bind(this);
         this.clearDisplay=this.clearDisplay.bind(this);
-        this.showPercent=this.showPercent.bind(this);
+        this.Percent=this.Percent.bind(this);
         this.changeSign=this.changeSign.bind(this);
-        this.showSin = this.showSin.bind(this);
-        this.showCos = this.showCos.bind(this);
-        this.showTan = this .showTan.bind(this);
-        this.showLog = this.showLog.bind(this);
-        this.showFac = this.showFac.bind(this);
-        this.eValue = this.eValue.bind(this);
-        this.piValue = this.piValue.bind(this);
-        this.showSqa = this.showSqa.bind(this);
-        this.showAbs = this.showAbs.bind(this);
-        this.showLn = this.showLn.bind(this);
+        this.Sin = this.Sin.bind(this);
+        this.Cos = this.Cos.bind(this);
+        this.Tan = this .Tan.bind(this);
+        this.Log = this.Log.bind(this);
+        this.Factorial = this.Factorial.bind(this);
+        this.e = this.e.bind(this);
+        this.pi = this.pi.bind(this);
+        this.Square = this.Square.bind(this);
+	    this.squareRoot = this.squareRoot.bind(this);
+        this.Absolute = this.Absolute.bind(this);
+        this.Ln = this.Ln.bind(this);
         this.showLast = this .showLast.bind(this);
 
         
@@ -106,13 +107,19 @@ class App extends Component {
 	}
   	
  }
+ squareRoot(){
+	 const {displayValue}=this.state
+	 this.setState({
+		displayValue : Math.Sqrt(displayValue)
+	})
+ }
  changeSign(){
 	const {displayValue}=this.state
 	this.setState({
 		displayValue : displayValue.substr(0,1)== '-' ? displayValue.substr(1) : '-'+displayValue
 	})
  }
- showAbs(){
+ Absolute(){
  	const {displayValue}=this.state
  	this.setState({
 		displayValue : displayValue.substr(0,1)== '-' ? displayValue.substr(1) : displayValue
@@ -120,7 +127,7 @@ class App extends Component {
 
  }
 
- showSqa(){
+ Square(){
  	const {displayValue}=this.state
  	this.setState({
 		displayValue : displayValue * displayValue
@@ -128,7 +135,7 @@ class App extends Component {
 
  }
 
- showPercent()
+ Percent()
  {
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
@@ -138,7 +145,7 @@ class App extends Component {
  }
  
  
- showSin()
+ Sin()
 {
 	const{displayValue}= this.state
 	const value = parseFloat(displayValue)
@@ -147,7 +154,7 @@ class App extends Component {
 		displayValue : (n  - (Math.pow(n,3))/6 + (Math.pow(n,5))/120  - (Math.pow(n,7))/5040).toPrecision(3),
 	})
 }
- showCos()
+ Cos()
  {
 	const{displayValue}= this.state
 	const value = parseFloat(displayValue)
@@ -157,7 +164,7 @@ class App extends Component {
 		displayValue : (1 - (Math.pow(n,2)/2) + (Math.pow(n,4)/24) - (Math.pow(n,6)/720 )).toPrecision(3),
  	})
  }
- showTan()
+ Tan()
  {
 	const{displayValue}= this.state
 	const value = parseFloat(displayValue)
@@ -170,7 +177,7 @@ class App extends Component {
 
 	
  
- showFac(){
+ Factorial(){
  	const{displayValue}=this.state
  	const value = parseFloat(displayValue)
  		function computeFactorialOfN(n) {
@@ -185,7 +192,7 @@ class App extends Component {
 
  }
 
-showLn(){
+Ln(){
 
 	const{displayValue}=this.state
 	const value = parseFloat(displayValue)
@@ -193,7 +200,7 @@ showLn(){
 		displayValue : (Math.log(value)).toPrecision(3), 
 	})
 }
-showLog(){
+Log(){
 	const{displayValue} = this.state
 	const value = parseFloat(displayValue)
 	this.setState({
@@ -202,7 +209,7 @@ showLog(){
 
 }
  
- eValue(){
+ e(){
 	const{displayValue}= this.state
 	this.setState({
 	displayValue : 2.718281,
@@ -210,10 +217,10 @@ showLog(){
 
  }
 
- piValue(){
+ pi(){
 	const{displayValue}= this.state
 	this.setState({
-	displayValue : Math.PI ,
+	displayValue : (Math.PI).toPrecision(5) ,
  })
  }
 
@@ -227,7 +234,7 @@ showLog(){
 		'*':(prevValue,nextValue) => prevValue*nextValue,
 		'/':(prevValue,nextValue) => prevValue/nextValue,
 		'=':(prevValue,nextValue) => nextValue,
-    	'^' : (prevValue,nextValue) => Math.pow(prevValue,nextValue),
+    	'x^y' : (prevValue,nextValue) => Math.pow(prevValue,nextValue),
     	
 	}
 	
@@ -286,34 +293,34 @@ showLog(){
 				<table cellspacing="10" cellpadding="5">
 				<tr>
 					
-					<td><button style={butn} onClick = {this.showPercent}>%</button></td>
+					<td><button style={butn} onClick = {this.Percent}>%</button></td>
 					<td><button style={butn} onClick={this.changeSign}>+/-</button></td>
 					<td><button style= {butn} onClick={()=>this.performOperation('/')}>/</button></td>
 					<td><button style={butn2} onClick ={this.clearDisplay}>AC</button></td>
 				</tr>
 				<tr>
-				     <td> <button style = {butn} onClick = {this.showSqa}> sq </button></td>
-				     <td> <button style = {butn} onClick = {this.showAbs}> |x| </button></td>
-				     <td> <button style = {butn} onClick = {this.showLog}> log</button></td>
-				     <td> <button style = {butn} onClick = {this.showLast}>C</button></td>
+				     <td> <button style = {butn} onClick = {this.Sqauare}>x²</button></td>
+				     <td> <button style = {butn} onClick = {this.Absolute}> |x| </button></td>
+				     <td> <button style = {butn} onClick = {this.Log}> log</button></td>
+				     <td> <button style = {butn} onClick = {this.squareRoot}>√</button></td>
 				</tr>
 				<tr>
-				    <td><button style={butn} onClick = {this.showSin}>sin</button></td>
-				    <td><button style={butn} onClick = {this.showCos}>cos</button></td>
-				    <td><button style={butn} onClick = {this.showTan}>tan</button></td>
-				    <td><button style={butn} onClick = {this.showLn}>ln</button></td>
+				    <td><button style={butn} onClick = {this.Sin}>sin</button></td>
+				    <td><button style={butn} onClick = {this.Cos}>cos</button></td>
+				    <td><button style={butn} onClick = {this.Tan}>tan</button></td>
+				    <td><button style={butn} onClick = {this.Ln}>ln</button></td>
 				</tr>
 				<tr>
-				    <td><button style={butn} onClick = {this.eValue }>e</button></td>
-				    <td><button style={butn} onClick = {this.piValue}>pi</button></td>
-				    <td><button style={butn} onClick = {this.showFac}>!</button></td>
-				    <td><button style={butn} onClick = {() =>this.performOperation('^')}>^</button></td>
+				    <td><button style={butn} onClick = {this.e }>e</button></td>
+				    <td><button style={butn} onClick = {this.pi}>п</button></td>
+				    <td><button style={butn} onClick = {this.Factorial}>!</button></td>
+				    <td><button style={butn} onClick = {() =>this.performOperation('^')}>x^y</button></td>
 				</tr>
 				<tr>
 					<td><button style={butn1} onClick={()=>this.inputDigit(7)}>7</button></td>
 					<td><button style={butn1} onClick={()=>this.inputDigit(8)}>8</button></td>
 					<td><button style={butn1} onClick={()=>this.inputDigit(9)}>9</button></td>
-					<td><button style={{backgroundColor : "#FFA500"}} onClick={()=>this.performOperation('*')}>x</button></td>
+					<td><button style={{backgroundColor : "#FFA500"}} onClick={()=>this.performOperation('*')}>*</button></td>
 				</tr>
 				<tr>
 					<td><button style={butn1} onClick={()=> this.inputDigit(4)}>4</button></td>
@@ -331,6 +338,7 @@ showLog(){
 					<td><button style={{backgroundColor: "grey" ,width : "50"}} onClick={() => this.inputDigit(0)}>0</button></td>
 					<td><button style={butn1} onClick={this.inputDot}>.</button></td>
 					<td><button onClick={() =>this.performOperation('=')}>=</button></td>
+					<td> <button style = {butn} onClick = {this.showLast}>C</button></td>
 					
 				</tr>
 				</table>
@@ -350,4 +358,13 @@ export default App;
 		
 
 
+
+
+	
+
+
+
+    
+		
+			
 
